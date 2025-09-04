@@ -1,0 +1,1224 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Aman</title>
+    <style>
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 60px; /* Ensure body content doesn't overlap with the fixed header */
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;  /* Fix the header to the top */
+    top: 0;
+    left: 0;
+    width: 99%;  /* Ensure header spans full width */
+    z-index: 999; /* Ensures the header stays above other content */
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header .menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header .menu .search {
+    cursor: pointer;
+}
+
+.header .menu .language-reserve {
+    display: flex;
+    gap: 15px;
+}
+
+/* Navbar Styles */
+.navbar {
+    margin-top: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;  /* Ensure navbar spans full height */
+    width: 250px;  /* Set the width to 250px, adjust as needed */
+    background-color: #222;
+    color: white;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 998;
+}
+
+.navbar.active {
+    transform: translateX(0);  /* Bring navbar into view */
+    width: 250px;  /* Ensure navbar width is consistent */
+}
+
+/* Navbar Items */
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #444;
+}
+
+.navbar li:hover {
+    background-color: #555;
+}
+
+/* Collapsible Button */
+.toggle-btn {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    background: none;
+    color: white;
+    border: none;
+    outline: none;
+}
+/* Keyframes for fade-in and slide-up effect */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    overflow: hidden;
+}
+
+.image-heading {
+    text-align: center;
+    margin-bottom: 20px; /* Add some spacing between the heading and the image */
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    font-family: Arial, sans-serif;
+    opacity: 0; /* Initially hidden */
+    animation: fadeInSlideUp 1.5s ease forwards; /* Trigger animation */
+    animation-delay: 0.3s; /* Add delay for heading */
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 700px;
+    object-fit: cover;
+    margin: 0 auto;
+    opacity: 0; /* Initially hidden */
+    animation: fadeInSlideUp 1.5s ease forwards; /* Trigger animation */
+    animation-delay: 0.8s; /* Add delay for image */
+}
+
+.header-image {
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+}
+
+
+
+
+/* Image Style */
+
+.events-section .text {
+            width: 45%;
+        }
+
+        .events-section .text h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .events-section .text p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Centered Images Section */
+        .events-section .images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .events-section .images .image {
+            width: 250px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .events-section .images .image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .events-section .images .image h3 {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .events-section .images .image p {
+            font-size: 14px;
+            color: #777;
+            margin-top: 5px;
+        }
+        .member-offers {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f8f8f8;
+            margin-top: 50px;
+        }
+
+        .member-offers h2 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .offer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .offer .offer-item {
+            width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .offer .offer-item h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .offer .offer-item p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .offer .offer-item .btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .offer .offer-item .btn:hover {
+            background-color: #555;
+        }
+        .offer .offer-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .main-image-container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .main-image {
+            width: 40%; /* Smaller width */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section Images Container */
+        .section-images-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .section-image {
+            width: 150px; /* Smaller width */
+            height: 100px; /* Smaller height */
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-image:hover {
+            transform: scale(1.1); /* Hover effect */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hover Overlay */
+        .section-image:hover::before {
+            content: attr(data-title);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+            width: 90%;
+        }
+
+        .text-container {
+            margin: 20px auto;
+            text-align: center;
+            width: 60%;
+        }
+
+        .text-container h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .text-container p {
+            font-size: 16px;
+            color: #555;
+        }
+        .image-container1 {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.intro-description {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.intro-description h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.intro-description p {
+    font-size: 18px;
+    color: #555;
+    max-width: 80%;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.main-image {
+    width: 80%; /* Adjusted width */
+    height: 200px; /* Reduced height */
+    margin-top: 20px; /* Space between the image and the content */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+        .overlay-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            pointer-events: none;
+        }
+
+        .section {
+            flex: 1;
+            position: relative;
+            pointer-events: all;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: background-color 0.3s;
+        }
+
+        .section:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .section span {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            visibility: hidden;
+        }
+
+        .section:hover span {
+            visibility: visible;
+        }
+
+        .info-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .info-container h2 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .info-container p {
+            font-size: 14px;
+            color: #555;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        .modal-content input,
+        .modal-content button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal-content button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background-color: #e64a19;
+        }
+        .close-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .close-btn:hover {
+            background-color: #d32f2f;
+        }
+      /* Review Section Container */
+.review-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* Review Form Styles */
+.review-form-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.review-form-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+#reviewForm {
+    display: grid;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#reviewForm input,
+#reviewForm textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#reviewForm input:focus,
+#reviewForm textarea:focus {
+    outline: none;
+    border-color: #2c3e50;
+    box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.1);
+}
+
+#reviewForm textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+#reviewForm button {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+    justify-self: center;
+}
+
+#reviewForm button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 62, 80, 0.2);
+}
+
+/* Reviews Display Section */
+.reviews-container {
+    margin-top: 50px;
+}
+
+.reviews-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#reviewsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+.review-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+.review-card .reviewer-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.review-card .review-text {
+    color: #555;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.review-card .review-date {
+    color: #888;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .review-section {
+        padding: 20px;
+        margin: 30px 15px;
+    }
+    
+    #reviewsList {
+        grid-template-columns: 1fr;
+    }
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .review-section {
+        padding: 20px;
+        margin: 30px 15px;
+    }
+    
+    #reviewsList {
+        grid-template-columns: 1fr;
+    }
+}
+@media screen and (max-width: 768px) {
+    /* Header Adjustments */
+    .header {
+        flex-direction: row;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+    }
+
+    .header .logo {
+        font-size: 20px;
+    }
+
+    .header .menu {
+        gap: 10px;
+    }
+
+    .header .menu .language-reserve {
+        gap: 10px;
+    }
+
+    /* Navbar Adjustments */
+    .navbar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    /* Image Container */
+    .image-container {
+        height: 400px;
+    }
+
+    .image-container .image {
+        max-height: 400px;
+    }
+
+    .image-heading h3 {
+        font-size: 24px;
+    }
+
+    /* Intro Description */
+    .intro-description {
+        padding: 0 15px;
+    }
+
+    .intro-description h1 {
+        font-size: 28px;
+    }
+
+    .intro-description p {
+        font-size: 16px;
+        max-width: 100%;
+    }
+
+    /* Image Container 1 */
+    .image-container1 {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .overlay-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .overlay-container .section {
+        height: 100px;
+        width: 100%;
+    }
+
+    .main-image {
+        width: 100%;
+        height: 300px;
+    }
+
+    /* Events Section */
+    .events-section .text {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .events-section .images {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .events-section .images .image {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+
+    /* Member Offers */
+    .offer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .offer .offer-item {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer .column {
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footer .subscribe input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .footer .social-icons {
+        justify-content: center;
+    }
+
+    /* Review Section */
+    .review-section {
+        padding: 20px 15px;
+    }
+
+    #reviewsList {
+        grid-template-columns: 1fr;
+    }
+
+    .review-form-container {
+        padding: 20px 15px;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        max-width: 350px;
+        padding: 15px;
+    }
+}
+
+/* Additional Responsive Tweaks for Smaller Screens */
+@media screen and (max-width: 480px) {
+    .header .menu {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .header .menu .language-reserve {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .image-heading h3 {
+        font-size: 20px;
+    }
+
+    .intro-description h1 {
+        font-size: 24px;
+    }
+}
+   
+
+   
+/* Footer Styles */
+.footer {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 40px;
+      margin-top:20px;
+    }
+    .footer .column {
+      margin-bottom: 20px;
+    }
+    .footer h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .footer .subscribe input {
+      padding: 10px;
+      border: none;
+      width: 70%;
+      margin-right: 5px;
+    }
+    .footer .subscribe button {
+      padding: 10px;
+      border: none;
+      background-color: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+    .footer .social-icons a {
+      margin-right: 10px;
+      font-size: 18px;
+      color: #fff;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 18px;
+}
+    .footer .column {
+      flex: 1 1 200px;
+    }
+    .social-icons {
+    margin-top: 10px;
+}
+
+.social-icon {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-icon img {
+    width: 32px;  /* Set width to a fixed size */
+    height: 32px; /* Set height to a fixed size */
+    object-fit: cover;  /* Ensures the image maintains its aspect ratio without distortion */
+    transition: transform 0.3s ease;
+}
+
+.social-icon img:hover {
+    transform: scale(1.2); /* Enlarge the icon on hover */
+}
+/* Alert Box Styles */
+.alert {
+    background-color: dark;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+    border-radius: 5px;
+}
+
+.alert .close {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.alert.show {
+    display: block;
+}
+
+</style>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button class="toggle-btn" onclick="toggleNavbar()">&#9776;</button>
+        <div class="logo">AMAN</div>
+        <div class="menu">
+            <span class="search">🔍</span>
+            <div class="language-reserve">
+                <span>English</span>
+                <button class="reserve-btn" onclick="openModal()">Reserve</button>
+            </div>
+        </div>
+    </header>
+    <!-- Modal -->
+    <div class="modal" id="reserveModal">
+        <div class="modal-content">
+            <h2>Reserve a Room</h2>
+            <form id="reserveForm">
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="date" placeholder="Check-in Date" required>
+                <input type="date" placeholder="Check-out Date" required>
+                <button type="submit">Submit</button>
+                <button type="button" class="close-btn" onclick="closeModal()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <div class="image-heading">
+            <h3>Welcome to Our Hotel</h3>
+        </div>
+        <img src="Screenshot 2025-02-02 201148.png" alt="Hotel Aman" class="image">
+    </div>
+    
+    
+    <div class="intro-description">
+        <h1>GLOBAL ICON OF INDIAN HOSPITALITY</h1>
+        <p>Experience world-class service and luxury with a touch of authentic Indian hospitality at Hotel Aman. Our commitment to excellence ensures that your stay is unforgettable.</p>
+    </div>
+     <!-- Navbar -->
+     <nav class="navbar" id="navbar">
+        <ul>
+            <li><a href="festive.html" style="color: white; text-decoration: none;">Festive</a></li>
+            <li><a href="experience.html" style="color: white; text-decoration: none;">Experience</a></li>
+            <li><a href="offer.html" style="color: white; text-decoration: none;">Exclusive Offers</a></li>
+            <li><a href="rooms.html" style="color: white; text-decoration: none;" >Rooms & Interiors</a></li>
+            <li><a href="about-us.html" style="color: white; text-decoration: none;">About Us</a></li>
+            <li><a href="pool.html" style="color: white; text-decoration: none;">Infinity Pool</a></li>
+            </ul>
+    </nav>
+    
+    <!-- Alert Box -->
+    <div id="alertBox" class="alert alert-dismissible">
+        <strong></strong>
+        <button class="close" onclick="closeNavbar()">&times;</button>
+    </div>
+
+   
+</div>
+    <div class="image-container1">
+        <img src="default.jpg" alt="Default Image" class="main-image" id="mainImage">
+        <div class="overlay-container">
+            <div 
+                class="section" 
+                data-image="hh3.jpg" 
+                data-title="Timeless" 
+                data-description="Discover timeless elegance."
+                onmouseover="updateMainImage(this)">
+                <span>Timeless</span>
+            </div>
+            <div 
+                class="section" 
+                data-image="hh2.jpg" 
+                data-title="Iconic" 
+                data-description="Experience iconic locations."
+                onmouseover="updateMainImage(this)">
+                <span>Iconic</span>
+            </div>
+            <div 
+                class="section" 
+                data-image="hh1.jpg" 
+                data-title="Authentic" 
+                data-description="Immerse in authentic culture."
+                onmouseover="updateMainImage(this)">
+                <span>Authentic</span>
+            </div>
+            <div 
+                class="section" 
+                data-image="h.jpg" 
+                data-title="Soulful" 
+                data-description="Connect with soulful environments."
+                onmouseover="updateMainImage(this)">
+                <span>Soulful</span>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="info-container">
+        <h2 id="mainTitle">Welcome</h2>
+        <p id="mainDescription">Hover over the sections to explore.</p>
+    </div>
+   
+    <div class="events-section">
+        <!-- Left Text Section -->
+        <div class="text">
+            <h2>Events and Conferences</h2>
+            <p>Our state-of-the-art facilities provide the perfect setting for your next meeting, conference, or special event. Whether you're hosting a corporate event or a memorable celebration, we offer world-class services and support to make it a success.</p>
+        </div>
+        <!-- Right Centered Images Section -->
+        <div class="images">
+            <div class="image">
+                <img src="cf1.jpg" alt="Meetings & Conferences">
+                <h3>Meetings & Conferences</h3>
+                <p>Host your next business meeting in style with our tailored packages.</p>
+            </div>
+            <div class="image">
+                <img src="events.jpg" alt="Events">
+                <h3>Events</h3>
+                <p>Celebrate life’s moments with unforgettable events at Aman.</p>
+            </div>
+            <div class="image">
+                <img src="wedding.jpg" alt="Timeless Weddings">
+                <h3>Timeless Weddings</h3>
+                <p>Make your special day magical with our bespoke wedding services.</p>
+            </div>
+        </div>
+    </div>
+    <div class="member-offers">
+        <h2>Member Offers</h2>
+        <div class="offer">
+            <div class="offer-item">
+                <img src="m1.jpg" alt="Art of Stay">
+                <h3>ART OF STAY</h3>
+                <p>Make this festive season all about unforgettable times with your loved ones. Join us to indulge in art of staycation and enjoy special privileges and savings on your stays as our valued NeuPass member</p>
+                <p>Validity:<h6> 05 Dec 2024 - 12 Jan 2025</h6></p>
+                <a href="#" class="btn">Login/Join</a>
+            </div>
+            <div class="offer-item">
+                <img src="m2.jpg" alt="Breakfast Inclusive Rate">
+                <h3>BREAKFAST INCLUSIVE RATE</h3>
+                <p>Wake up to a symphony of flavours with our delectable breakfast spread and enjoy seamless internet connectivity and flexible cancellation for that added convenience.</p>
+                <p>Validity:<h6>Round the Year</h6></p>
+                <a href="#" class="btn">Login/Join</a>
+            </div>
+            <div class="offer-item">
+                <img src="m3.jpg" alt="Breakfast Inclusive Stays">
+                <h3>BREAKFAST INCLUSIVE STAYS</h3>
+                <p>Wake up to a symphony of flavours with our delectable breakfast spread and enjoy seamless internet connectivity and flexible cancellation for that added convenience.</p>
+                <p>Validity:<h6>Till 31 Jan 2025</h6></p>
+                <a href="#" class="btn">Login/Join</a>
+            </div>
+            <div class="offer-item">
+                <img src="m4.jpg" alt="Limited Period Escape">
+                <h3>LIMITED PERIOD ESCAPE</h3>
+                <p>Enjoy 25% savings* with our Limited Period Escapes offer and turn your moments into timeless memories.</p>
+                <p>Validity:<h6>05 Dec 2024 - 05 Jan 2025</h6></p>
+                <a href="#" class="btn">Login/Join</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <section class="review-section">
+            <!-- Review Form -->
+            <div class="review-form-container">
+                <h3>Share Your Experience</h3>
+                <form id="reviewForm">
+                    <input type="text" id="customerName" placeholder="Your Name" required />
+                    <textarea id="customerReview" placeholder="Tell us about your stay..." required></textarea>
+                    <button type="submit">Submit Review</button>
+                </form>
+            </div>
+        
+            <!-- Reviews Display -->
+            <div class="reviews-container">
+                <h3>What Our Guests Say</h3>
+                <div id="reviewsList">
+                    <!-- Reviews will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+        
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="column subscribe">
+            <h4>SUBSCRIBE FOR LATEST UPDATES</h4>
+            <input type="email" placeholder="Enter your email Address">
+            <button>SUBSCRIBE</button>
+          </div>
+          <div class="column">
+            <h4>FOR BOOKINGS CONTACT</h4>
+            <p>1-800-111-825</p>
+            <p><a href="mailto:reservations@ihcltata.com">reservations@amanhotels.com</a></p>
+            <h4>CUSTOMER SUPPORT</h4>
+            <p><a href="mailto:contacttaj@tajhotels.com">contacttaj@amanhotels.com</a></p>
+            <p><a href="mailto:website.feedback@tajhotels.com">website.feedback@amanhotels.com</a></p>
+          </div>
+          <div class="column">
+            <h4>QUICK LINKS</h4>
+            <p><a href="#">Hotels</a></p>
+            <p><a href="#">Dining</a></p>
+            <p><a href="#">Wellness</a></p>
+            <p><a href="#">Timeless Weddings</a></p>
+            <p><a href="#">Event Venues</a></p>
+            <p><a href="#">Aman Magazine</a></p>
+          </div>
+        <div class="footer-content">
+            <p>Follow Us On:</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                    <img src="insta1.jpg" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com" target="_blank" class="social-icon">
+                    <img src="youtube.jpg" alt="YouTube">
+                </a>
+                <a href="https://www.twitter.com" target="_blank" class="social-icon">
+                    <img src="twitter.jpg" alt="Twitter">
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" class="social-icon">
+                    <img src="facebook.jpg" alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+    
+        </div>
+        <footer>
+            <p>&copy; 2025 Hotel Aman. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </footer>
+      </footer>
+
+    <script>
+        function toggleNavbar() {
+    const navbar = document.getElementById('navbar');
+    const alertBox = document.getElementById('alertBox');
+    navbar.classList.toggle('active');
+
+    // Show the alert box when the navbar is active
+    if (navbar.classList.contains('active')) {
+        alertBox.classList.add('show');
+    } else {
+        alertBox.classList.remove('show');
+    }
+}
+
+function closeNavbar() {
+    const navbar = document.getElementById('navbar');
+    const alertBox = document.getElementById('alertBox');
+    navbar.classList.remove('active'); // Close the navbar
+    alertBox.classList.remove('show'); // Hide the alert box
+}
+const mainImage = document.getElementById('mainImage');
+        const mainTitle = document.getElementById('mainTitle');
+        const mainDescription = document.getElementById('mainDescription');
+        const defaultImage = "default.jpg";
+
+        function updateMainImage(section) {
+            const image = section.getAttribute('data-image');
+            const title = section.getAttribute('data-title');
+            const description = section.getAttribute('data-description');
+
+            mainImage.src = image;
+            mainTitle.textContent = title;
+            mainDescription.textContent = description;
+        }
+
+        // Reset to default on mouseout of the entire container
+        const overlayContainer = document.querySelector('.overlay-container');
+        overlayContainer.addEventListener('mouseout', () => {
+            mainImage.src = defaultImage;
+            mainTitle.textContent = "Welcome";
+            mainDescription.textContent = "Hover over the sections to explore.";
+        });
+        
+
+        document.getElementById("reviewForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Get input values
+    const name = document.getElementById("customerName").value;
+    const review = document.getElementById("customerReview").value;
+    const date = new Date().toLocaleDateString();
+
+    // Create review card
+    const reviewCard = document.createElement("div");
+    reviewCard.className = "review-card";
+
+    // Add content to the review card
+    reviewCard.innerHTML = `
+        <div class="reviewer-name">${name}</div>
+        <div class="review-text">${review}</div>
+        <div class="review-date">${date}</div>
+    `;
+
+    // Add animation class
+    reviewCard.style.animation = "fadeInSlideUp 0.5s ease forwards";
+
+    // Append the new review to the reviews container
+    document.getElementById("reviewsList").prepend(reviewCard);
+
+    // Clear the form
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerReview").value = "";
+});
+
+
+    // Load reviews on page load
+    loadReviews();
+    function openModal() {
+            document.getElementById('reserveModal').style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('reserveModal').style.display = 'none';
+        }
+
+
+</script>
+</body>
+</html>
+
+  

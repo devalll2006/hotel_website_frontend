@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Aman - Experience</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;  /* Fix the header to the top */
+    top: 0;
+    left: 0;
+    width: 99%;  /* Ensure header spans full width */
+    z-index: 999; /* Ensures the header stays above other content */
+    height:30px;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header .menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header .menu .search {
+    cursor: pointer;
+}
+
+.header .menu .language-reserve {
+    display: flex;
+    gap: 15px;
+}
+
+/* Navbar Styles */
+.navbar {
+    margin-top: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;  /* Ensure navbar spans full height */
+    width: 250px;  /* Set the width to 250px, adjust as needed */
+    background-color: #222;
+    color: white;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 998;
+}
+
+.navbar.active {
+    transform: translateX(0);  /* Bring navbar into view */
+    width: 250px;  /* Ensure navbar width is consistent */
+}
+
+/* Navbar Items */
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #444;
+}
+
+.navbar li:hover {
+    background-color: #555;
+}
+/* Collapsible Button */
+.toggle-btn {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    background: none;
+    color: white;
+    border: none;
+    outline: none;
+}
+/* Alert Box Styles */
+.alert {
+    background-color: dark;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+    border-radius: 5px;
+}
+
+.alert .close {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.alert.show {
+    display: block;
+}
+
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        /* Video Section */
+        .video-section {
+    position: relative;
+    text-align: center;
+    margin-top: 100px; /* Adjust the margin to ensure space below the navbar */
+}
+
+.video-section video {
+    width: 30%;
+    max-height: 400px; /* Set a maximum height to prevent overlap */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+        /* Description Section */
+        .description {
+            padding: 20px;
+            text-align:left;
+        }
+
+        .description h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .description p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Images Section */
+        .images-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .image-item {
+            width: 300px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .image-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        /* Adventure Section */
+.adventure-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+.adventure-section h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.adventure-section p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Carousel Styles */
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    max-width: 40%; /* Reduce width for smaller size */
+    height: 300px; /* Set a fixed height for the carousel */
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel img {
+    width: 40%; /* Adjust width to fit within container */
+    height: 300px; /* Match the height of the container */
+    object-fit: cover;
+}
+
+/* Carousel Buttons */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        .modal-content input,
+        .modal-content button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal-content button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background-color: #e64a19;
+        }
+        .close-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .close-btn:hover {
+            background-color: #d32f2f;
+        }
+   
+        @media screen and (max-width: 768px) {
+    /* Header Adjustments */
+    .header {
+        flex-direction: row;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .header .menu {
+        gap: 10px;
+    }
+
+    .header .menu .language-reserve {
+        gap: 10px;
+    }
+
+    /* Navbar Adjustments */
+    .navbar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    /* Video Section */
+    .video-section video {
+        width: 90%;
+        max-height: 300px;
+    }
+
+    /* Description Section */
+    .description {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .description h2 {
+        font-size: 24px;
+    }
+
+    .description p {
+        font-size: 16px;
+    }
+
+    /* Images Section */
+    .images-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-item {
+        width: 90%;
+        max-width: 350px;
+        margin-bottom: 20px;
+    }
+
+    /* Adventure Section */
+    .adventure-section {
+        padding: 20px 10px;
+    }
+
+    .adventure-section h2 {
+        font-size: 24px;
+    }
+
+    .adventure-section p {
+        font-size: 16px;
+    }
+
+    /* Carousel */
+    .carousel-container {
+        max-width: 90%;
+        height: 250px;
+    }
+
+    .carousel img {
+        height: 250px;
+    }
+
+    .carousel-btn {
+        font-size: 20px;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        max-width: 350px;
+        padding: 15px;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer .column {
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footer .subscribe input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .footer .social-icons {
+        justify-content: center;
+    }
+}
+
+/* Additional Responsive Tweaks for Smaller Screens */
+@media screen and (max-width: 480px) {
+    .header .menu {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .header .menu .language-reserve {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .video-section video {
+        height: 200px;
+    }
+
+    .description h2 {
+        font-size: 22px;
+    }
+
+    .description p {
+        font-size: 14px;
+    }
+
+    .carousel-container {
+        height: 200px;
+    }
+
+    .carousel img {
+        height: 200px;
+    }
+}
+
+ 
+         
+/* Footer Styles */
+.footer {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 40px;
+    }
+    .footer .column {
+      margin-bottom: 20px;
+    }
+    .footer h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .footer .subscribe input {
+      padding: 10px;
+      border: none;
+      width: 70%;
+      margin-right: 5px;
+    }
+    .footer .subscribe button {
+      padding: 10px;
+      border: none;
+      background-color: #fff;
+      color: #000;
+      cursor: pointer;
+    }
+    .footer .social-icons a {
+      margin-right: 10px;
+      font-size: 18px;
+      color: #fff;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 18px;
+}
+    .footer .column {
+      flex: 1 1 200px;
+    }
+    .social-icons {
+    margin-top: 10px;
+}
+
+.social-icon {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-icon img {
+    width: 32px;  /* Set width to a fixed size */
+    height: 32px; /* Set height to a fixed size */
+    object-fit: cover;  /* Ensures the image maintains its aspect ratio without distortion */
+    transition: transform 0.3s ease;
+}
+
+.social-icon img:hover {
+    transform: scale(1.2); /* Enlarge the icon on hover */
+}
+    </style>
+</head>
+<body class="loading">
+    <!-- Header -->
+    <header class="header">
+        <button class="toggle-btn" onclick="toggleNavbar()">&#9776;</button>
+        <div class="logo">AMAN</div>
+        <div class="menu">
+            <span class="search">🔍</span>
+            <div class="language-reserve">
+                <span>English</span>
+                <button class="reserve-btn" onclick="openModal()">Reserve</button>
+            </div>
+        </div>
+    </header>
+     <!-- Navbar -->
+     <nav class="navbar" id="navbar">
+        <ul>
+            <li><a href="festive.html" style="color: white; text-decoration: none;">Festive</a></li>
+            <li><a href="experience.html" style="color: white; text-decoration: none;">Experience</a></li>
+            <li><a href="offer.html" style="color: white; text-decoration: none;">Exclusive Offers</a></li>
+            <li><a href="rooms.html" style="color: white; text-decoration: none;" >Rooms & Interiors</li>
+            <li><a href="about-us.html" style="color: white; text-decoration: none;">About Us</a></li>
+            <li><a href="pool.html" style="color:white;text-decoration: none;">Infinity Pool</a></li>
+           
+
+        </ul>
+    </nav>
+      <!-- Modal -->
+      <div class="modal" id="reserveModal">
+        <div class="modal-content">
+            <h2>Reserve a Room</h2>
+            <form id="reserveForm">
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="date" placeholder="Check-in Date" required>
+                <input type="date" placeholder="Check-out Date" required>
+                <button type="submit">Submit</button>
+                <button type="button" class="close-btn" onclick="closeModal()">Close</button>
+            </form>
+        </div>
+    </div>
+     <!-- Alert Box -->
+     <div id="alertBox" class="alert alert-dismissible">
+        <strong></strong>
+        <button class="close" onclick="closeNavbar()">&times;</button>
+    </div>
+   
+    <!-- Video Section -->
+    <div class="video-section">
+        <video controls autoplay muted loop>
+            <source src="event.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Description Section -->
+    <div class="description">
+        <h2>Experience Unforgettable Moments</h2>
+        <p>
+            Celebrate life’s special moments at Hotel Aman. Our world-class facilities and dedicated team ensure your events are truly exceptional. Whether it’s a wedding, corporate event, or a private party, we bring your vision to life with elegance and style.
+        </p>
+    </div>
+
+    <!-- Images Section -->
+    <div class="images-container">
+        <div class="image-item">
+            <img src="eve4.jpg" alt="Event Image 1">
+        </div>
+        <div class="image-item">
+            <img src="eve5.jpg" alt="Event Image 2">
+        </div>
+        <div class="image-item">
+            <img src="eve6.jpg" alt="Event Image 3">
+        </div>
+    </div>
+
+   <!-- Adventure Section -->
+<div class="adventure-section">
+    <h2>Adventure Awaits</h2>
+    <p>
+        Embark on thrilling adventures with Hotel Aman.PVC Tarpaulin bouncing water ball,pool toys and floats for kids.,hot ballon air,Flyboarding,we offer experiences that fuel your sense of wonder and excitement.
+    </p>
+    <div class="carousel-container">
+        <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
+        <div class="carousel">
+            <img src="spo1.jpg" alt="Adventure 1">
+            <img src="spo2.jpg" alt="Adventure 2">
+            <img src="spo3.jpg" alt="Adventure 3">
+            <img src="spo4.jpg" alt="Adventure 4">
+        </div>
+        <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
+    </div>
+</div>
+
+     <!-- Back to Home Button -->
+     <div style="text-align: center; margin-top: 20px;">
+        <a href="h3.html" style="text-decoration: none;">
+            <button style="padding: 10px 20px; font-size: 16px; background-color: #00bcd4; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Back to Home
+            </button>
+        </a>
+    </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="column subscribe">
+            <h4>SUBSCRIBE FOR LATEST UPDATES</h4>
+            <input type="email" placeholder="Enter your email Address">
+            <button>SUBSCRIBE</button>
+          </div>
+          <div class="column">
+            <h4>FOR BOOKINGS CONTACT</h4>
+            <p>1-800-111-825</p>
+            <p><a href="mailto:reservations@ihcltata.com">reservations@amanhotels.com</a></p>
+            <h4>CUSTOMER SUPPORT</h4>
+            <p><a href="mailto:contacttaj@tajhotels.com">contacttaj@amanhotels.com</a></p>
+            <p><a href="mailto:website.feedback@tajhotels.com">website.feedback@amanhotels.com</a></p>
+          </div>
+          <div class="column">
+            <h4>QUICK LINKS</h4>
+            <p><a href="#">Hotels</a></p>
+            <p><a href="#">Dining</a></p>
+            <p><a href="#">Wellness</a></p>
+            <p><a href="#">Timeless Weddings</a></p>
+            <p><a href="#">Event Venues</a></p>
+            <p><a href="#">Aman Magazine</a></p>
+          </div>
+          <div class="footer-content">
+            <p>Follow Us On:</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                    <img src="insta1.jpg" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com" target="_blank" class="social-icon">
+                    <img src="youtube.jpg" alt="YouTube">
+                </a>
+                <a href="https://www.twitter.com" target="_blank" class="social-icon">
+                    <img src="twitter.jpg" alt="Twitter">
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" class="social-icon">
+                    <img src="facebook.jpg" alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+        </div>
+        <footer>
+            <p>&copy; 2025 Hotel Aman. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </footer>
+      </footer>
+
+
+    <script>
+           function toggleNavbar() {
+    const navbar = document.getElementById('navbar');
+    const alertBox = document.getElementById('alertBox');
+    navbar.classList.toggle('active');
+
+    // Show the alert box when the navbar is active
+    if (navbar.classList.contains('active')) {
+        alertBox.classList.add('show');
+    } else {
+        alertBox.classList.remove('show');
+    }
+}
+
+function closeNavbar() {
+    const navbar = document.getElementById('navbar');
+    const alertBox = document.getElementById('alertBox');
+    navbar.classList.remove('active'); // Close the navbar
+    alertBox.classList.remove('show'); // Hide the alert box
+}
+        // Ensure fade-in transition after the page has loaded
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+        let currentSlide = 0;
+
+function moveCarousel(direction) {
+    const carousel = document.querySelector('.carousel');
+    const totalSlides = document.querySelectorAll('.carousel img').length;
+
+    // Update currentSlide index
+    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+
+    // Move carousel
+    const slideWidth = carousel.offsetWidth / totalSlides;
+    carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+}
+ // Load reviews on page load
+ loadReviews();
+    function openModal() {
+            document.getElementById('reserveModal').style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('reserveModal').style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>
